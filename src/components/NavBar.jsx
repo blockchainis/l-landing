@@ -22,7 +22,7 @@ import {
   ChevronRightIcon,
 } from "@chakra-ui/icons";
 
-export default function NavBar({currentVisibleIndex}) {
+export default function NavBar({currentVisibleIndex, onClickNavLink}) {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -65,7 +65,7 @@ export default function NavBar({currentVisibleIndex}) {
           </Text>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
-            <DesktopNav currentVisibleIndex={currentVisibleIndex} />
+            <DesktopNav currentVisibleIndex={currentVisibleIndex} onClickNavLink={onClickNavLink}/>
           </Flex>
         </Flex>
 
@@ -97,7 +97,7 @@ export default function NavBar({currentVisibleIndex}) {
   );
 }
 
-const DesktopNav = ({currentVisibleIndex}) => {
+const DesktopNav = ({currentVisibleIndex, onClickNavLink}) => {
   const linkColor = "white";
   const linkHoverColor = "purple.400";
   const popoverContentBgColor = "black";
@@ -110,7 +110,7 @@ const DesktopNav = ({currentVisibleIndex}) => {
             <PopoverTrigger>
               <Link
                 p={2}
-                href={navItem.href ?? "#"}
+                onClick={() => onClickNavLink(index)}
                 fontSize={"sm"}
                 fontWeight={500}
                 color={currentVisibleIndex === index ? "purple.400" :linkColor}
@@ -243,7 +243,7 @@ const MobileNavItem = ({ label, children, href }) => {
 
 const NAV_ITEMS = [
   {
-    label: "Inspiration",
+    label: "히어로",
     children: [
       {
         label: "Explore Design Work",
@@ -258,7 +258,7 @@ const NAV_ITEMS = [
     ],
   },
   {
-    label: "Find Work",
+    label: "피처",
     children: [
       {
         label: "Job Board",
@@ -273,11 +273,15 @@ const NAV_ITEMS = [
     ],
   },
   {
-    label: "Learn Design",
+    label: "통계",
     href: "#",
   },
   {
-    label: "Hire Designers",
+    label: "가격",
+    href: "#",
+  },
+  {
+    label: "히어로 2",
     href: "#",
   },
 ];

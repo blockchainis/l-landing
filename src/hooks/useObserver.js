@@ -9,9 +9,7 @@ function useObserver(callbackFn) {
       threshold: 0.7,
     };
 
-    const callback = (entries) => {
-      //entries = [entry]
-      console.log(entries);
+    const callback = (entries, observer) => {
       const entry = entries[0];
       if (entry.isIntersecting) {
         callbackFnRef.current();
