@@ -21,6 +21,7 @@ import Fonts from "./Fonts";
 import { useState, useRef, useEffect } from "react";
 import useObserver from "./hooks/useObserver";
 
+import { scrollIntoView } from "seamless-scroll-polyfill";
 function App() {
   const [currentVisibleIndex, setCurrentVisibleIndex] = useState(0);
   const handleVisible = (index) => {
@@ -37,7 +38,7 @@ function App() {
 
   const handleClickNavLink = (index) => {
     const refs = [heroRef, featuresRef, statisticsRef, pricingRef, heroTwoRef];
-    refs[index].current.scrollIntoView({
+    scrollIntoView(refs[index].current, {
       behavior: "smooth",
       inline: "center",
       block: "center",
