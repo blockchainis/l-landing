@@ -18,13 +18,25 @@ import Footer from "@components/Footer";
 import ThreeTierPricing from "@components/Pricing";
 import theme from "./theme";
 import Fonts from "./Fonts";
+import { useState, useRef, useEffect } from "react";
+import useObserver from "./hooks/useObserver";
 
 function App() {
+  const [currentVisibleIndex, setCurrentVisibleIndex] = useState(1);
+  console.log(currentVisibleIndex)
+  const handleVisible = (index) => {
+    return () => {
+      setCurrentVisibleIndex(index);
+    };
+  };
+
+  const heroRef = useObserver(handleVisible(0));
+
   return (
     <ChakraProvider theme={theme}>
       <Fonts />
-      <NavBar />
-      <Hero />
+      <NavBar currentVisibleIndex={currentVisibleIndex} />
+      <Hero ref={heroRef} />
       <Features />
       <Statistics />
       <ThreeTierPricing />

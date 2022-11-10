@@ -22,7 +22,7 @@ import {
   ChevronRightIcon,
 } from "@chakra-ui/icons";
 
-export default function WithSubnavigation() {
+export default function NavBar({currentVisibleIndex}) {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -65,7 +65,7 @@ export default function WithSubnavigation() {
           </Text>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
-            <DesktopNav />
+            <DesktopNav currentVisibleIndex={currentVisibleIndex} />
           </Flex>
         </Flex>
 
@@ -97,14 +97,14 @@ export default function WithSubnavigation() {
   );
 }
 
-const DesktopNav = () => {
+const DesktopNav = ({currentVisibleIndex}) => {
   const linkColor = "white";
   const linkHoverColor = "purple.400";
   const popoverContentBgColor = "black";
 
   return (
     <Stack direction={"row"} spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
+      {NAV_ITEMS.map((navItem, index) => (
         <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
@@ -113,7 +113,7 @@ const DesktopNav = () => {
                 href={navItem.href ?? "#"}
                 fontSize={"sm"}
                 fontWeight={500}
-                color={linkColor}
+                color={currentVisibleIndex === index ? "purple.400" :linkColor}
                 _hover={{
                   textDecoration: "none",
                   color: linkHoverColor,
