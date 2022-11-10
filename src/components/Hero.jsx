@@ -59,7 +59,10 @@ const Hero = forwardRef((props, ref) => {
           </Button>
         </Stack>
         <Flex w={"full"} align={"center"} justify={"center"} pos={"relative"}>
-          <Image src={lockedImage} height={"80px"}></Image>
+          <Image
+            src={process.env.PUBLIC_URL + "/locked.png"}
+            height={"80px"}
+          ></Image>
           <Box
             w={"90px"}
             h={"90px"}
